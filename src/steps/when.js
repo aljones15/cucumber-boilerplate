@@ -1,20 +1,20 @@
-import clearInputField from '../support/action/clearInputField';
-import clickElement from '../support/action/clickElement';
-import closeLastOpenedWindow from '../support/action/closeLastOpenedWindow';
-import deleteCookie from '../support/action/deleteCookie';
-import dragElement from '../support/action/dragElement';
-import focusLastOpenedWindow from '../support/action/focusLastOpenedWindow';
-import handleModal from '../support/action/handleModal';
-import moveToElement from '../support/action/moveToElement';
-import pause from '../support/action/pause';
-import pressButton from '../support/action/pressButton';
-import scroll from '../support/action/scroll';
-import selectOption from '../support/action/selectOption';
-import selectOptionByIndex from '../support/action/selectOptionByIndex';
-import setCookie from '../support/action/setCookie';
-import setInputField from '../support/action/setInputField';
-import setPromptText from '../support/action/setPromptText';
-import submitForm from '../support/action/submitForm';
+import clearInputField from '../support/action/web/clearInputField';
+import clickElement from '../support/action/web/clickElement';
+import closeLastOpenedWindow from '../support/action/web/closeLastOpenedWindow';
+import deleteCookie from '../support/action/web/deleteCookie';
+import dragElement from '../support/action/web/dragElement';
+import focusLastOpenedWindow from '../support/action/web/focusLastOpenedWindow';
+import handleModal from '../support/action/web/handleModal';
+import moveToElement from '../support/action/web/moveToElement';
+import pause from '../support/action/web/pause';
+import pressButton from '../support/action/web/pressButton';
+import scroll from '../support/action/web/scroll';
+import selectOption from '../support/action/web/selectOption';
+import selectOptionByIndex from '../support/action/web/selectOptionByIndex';
+import setCookie from '../support/action/web/setCookie';
+import setInputField from '../support/action/web/setInputField';
+import setPromptText from '../support/action/web/setPromptText';
+import submitForm from '../support/action/web/submitForm';
 
 module.exports = function when() {
     this.When(

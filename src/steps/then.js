@@ -23,8 +23,8 @@ import compareText from '../support/check/compareText';
 import isEnabled from '../support/check/isEnabled';
 import isExisting from '../support/check/isExisting';
 import isVisible from '../support/check/isVisible';
-import waitFor from '../support/action/waitFor';
-import waitForVisible from '../support/action/waitForVisible';
+import waitFor from '../support/action/web/waitFor';
+import waitForVisible from '../support/action/web/waitForVisible';
 
 module.exports = function then() {
     this.Then(

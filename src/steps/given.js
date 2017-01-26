@@ -11,12 +11,12 @@ import checkProperty from '../support/check/checkProperty';
 import checkSelected from '../support/check/checkSelected';
 import checkTitle from '../support/check/checkTitle';
 import checkUrl from '../support/check/checkURL';
-import closeAllButFirstTab from '../support/action/closeAllButFirstTab';
+import closeAllButFirstTab from '../support/action/web/closeAllButFirstTab';
 import compareText from '../support/check/compareText';
 import isEnabled from '../support/check/isEnabled';
 import isVisible from '../support/check/isVisible';
-import openWebsite from '../support/action/openWebsite';
-import resizeScreenSize from '../support/action/resizeScreenSize';
+import openWebsite from '../support/action/web/openWebsite';
+import resizeScreenSize from '../support/action/web/resizeScreenSize';
 
 module.exports = function given() {
     this.Given(
