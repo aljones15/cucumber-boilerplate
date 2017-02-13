@@ -1,3 +1,4 @@
+import SectionToSelector from '../helpers/ElementNameToSelector';
 /**
  * Check if the given element has the given class
  * @param  {String}   elem              Element selector

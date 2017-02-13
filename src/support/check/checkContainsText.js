@@ -1,3 +1,5 @@
+
+import SectionToSelector from '../helpers/ElementNameToSelector';
 /**
  * Check if the given elements contains text
  * @param  {String}   type          Type of element (inputfield or element)
@@ -36,7 +38,7 @@ module.exports = (type, element, falseCase, expectedText, done) => {
      * The text of the element
      * @type {String}
      */
-    const text = browser[command](element);
+    const text = browser[command](SectionToSelector(element));
 
     if (typeof expectedText === 'function') {
         doneCallback = expectedText;

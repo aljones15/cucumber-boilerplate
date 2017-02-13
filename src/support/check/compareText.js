@@ -1,3 +1,5 @@
+
+import SectionToSelector from '../helpers/ElementNameToSelector';
 /**
  * Compare the contents of two elements with each other
  * @param  {String}   element1  Element selector for the first element
@@ -11,13 +13,13 @@ module.exports = (element1, falseCase, element2, done) => {
      * The text of the first element
      * @type {String}
      */
-    const text1 = browser.getText(element1);
+    const text1 = browser.getText(SectionToSelector(element1));
 
     /**
      * The text of the second element
      * @type {String}
      */
-    const text2 = browser.getText(element2);
+    const text2 = browser.getText(SectionToSelector(element2));
 
     if (falseCase) {
         expect(text1).to.not.equal(

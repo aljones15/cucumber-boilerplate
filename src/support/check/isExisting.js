@@ -1,3 +1,4 @@
+import SectionToSelector from '../helpers/ElementNameToSelector';
 /**
  * Check if the given element exists in the current DOM
  * @param  {String}   selector  Element selector
@@ -9,8 +10,9 @@ module.exports = (selector, falseCase, done) => {
      * Elements found in the DOM
      * @type {Object}
      */
-    const elements = browser.elements(selector).value;
-
+   const elements = browser.elements(SectionToSelector(selector)).value;
+    
+        
     if (falseCase) {
         expect(elements).to.have
             .lengthOf(0, `Expected element "${selector}" not to exist`);

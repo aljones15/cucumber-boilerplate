@@ -1,3 +1,5 @@
+
+import SectionToSelector from '../helpers/ElementNameToSelector';
 /**
  * Check if the given element is enabled
  * @param  {String}   element   Element selector
@@ -10,7 +12,7 @@ module.exports = (element, falseCase, done) => {
      * The enabled state of the given element
      * @type {Boolean}
      */
-    const isEnabled = browser.isEnabled(element);
+    const isEnabled = browser.isEnabled(SectionToSelector(element));
 
     if (falseCase) {
         expect(isEnabled).to.not

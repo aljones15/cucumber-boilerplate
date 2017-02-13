@@ -1,3 +1,5 @@
+
+import SectionToSelector from '../helpers/ElementNameToSelector';
 /**
  * Check the dimensions of the given element
  * @param  {String}   elem         Element selector

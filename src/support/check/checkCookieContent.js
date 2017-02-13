@@ -1,3 +1,5 @@
+
+import SectionToSelector from '../helpers/ElementNameToSelector';
 /**
  * Check the content of a cookie against a given value
  * @param  {String}   name          The name of the cookie

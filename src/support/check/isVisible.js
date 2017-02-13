@@ -1,3 +1,5 @@
+import SectionToSelector from '../helpers/ElementNameToSelector';
+
 /**
  * Check if the given element is (not) visible
  * @param  {String}   element   Element selector
@@ -9,7 +11,7 @@ module.exports = (element, falseCase, done) => {
      * Visible state of the give element
      * @type {String}
      */
-    const isVisible = browser.isVisible(element);
+    const isVisible = browser.isVisible(SectionToSelector(element));
 
     if (falseCase) {
         expect(isVisible).to.not

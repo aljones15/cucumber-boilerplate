@@ -7,8 +7,7 @@ import checkDimension from '../support/check/checkDimension';
 import checkEqualsText from '../support/check/checkEqualsText';
 import checkFocus from '../support/check/checkFocus';
 import checkInURLPath from '../support/check/checkInURLPath';
-import checkIsOpenedInNewWindow from
-    '../support/check/checkIsOpenedInNewWindow';
+import checkIsOpenedInNewWindow from '../support/check/checkIsOpenedInNewWindow';
 import checkModal from '../support/check/checkModal';
 import checkModalText from '../support/check/checkModalText';
 import checkNewWindow from '../support/check/checkNewWindow';
@@ -25,66 +24,82 @@ import isExisting from '../support/check/isExisting';
 import isVisible from '../support/check/isVisible';
 import waitFor from '../support/action/web/waitFor';
 import waitForVisible from '../support/action/web/waitForVisible';
+import checkElementCount from '../support/check/checkElementCount';
+import checkDimensionsBtwn from '../support/check/checkDimensionsBtwn';
+import nth from '../support/helpers/nth.js';
+import pause from '../support/action/web/pause';
 
 module.exports = function then() {
+
+    this.Then(
+	/^I expect that there are ([0-9]+) "([^"]*)?" elements$/,
+	checkElementCount 
+    );
     this.Then(
         /^I expect that the title is( not)* "([^"]*)?"$/,
         checkTitle
     );
 
     this.Then(
-        /^I expect that element "([^"]*)?" is( not)* visible$/,
-        isVisible
+        /^I expect (that|the) (first|second|third|fourth|fifth|sixth)?\s?element "([^"]*)?" is( not)* visible$/,
+        (article, ordinal, el, not, cb) => isVisible(nth(el, ordinal), not, cb)
     );
 
     this.Then(
-        /^I expect that element "([^"]*)?" becomes( not)* visible$/,
-        waitForVisible
+        /^I expect (that|the) (first|second|third|fourth|fifth|sixth)?\s?element "([^"]*)?" becomes( not)* visible$/,
+        (article, ordinal, el, not, cb) => waitForVisible(nth(el, ordinal), not, cb)
     );
 
     this.Then(
-        /^I expect that element "([^"]*)?" is( not)* within the viewport$/,
-        checkWithinViewport
+        /^I expect (that|the) element "([^"]*)?" is( not)* within the viewport$/,
+        (article, el, not, cb) => checkWithinViewport(el, not, cb)
     );
 
     this.Then(
-        /^I expect that element "([^"]*)?" does( not)* exist$/,
-        isExisting
+        /^I expect (that|the) element "([^"]*)?" does( not)* exist$/,
+        (article, el, not, cb) => isExisting(el, not, cb)
     );
 
     this.Then(
-        /^I expect that element "([^"]*)?"( not)* contains the same text as element "([^"]*)?"$/,
-        compareText
+        /^I expect (that|the) element "([^"]*)?"( not)* contains the same text as element "([^"]*)?"$/,
+        (article, el, not, text, cb) => compareText(el, not, text, cb)
     );
 
     this.Then(
-        /^I expect that (element|inputfield) "([^"]*)?"( not)* matches the text "([^"]*)?"$/,
-        checkEqualsText
+        /^I expect (that|the) (element|inputfield) "([^"]*)?"( not)* matches the text "([^"]*)?"$/,
+        (article, selector, el, not, text, cb) => checkEqualsText(selector, el, not, text, cb)
     );
 
     this.Then(
-        /^I expect that (element|inputfield) "([^"]*)?"( not)* contains the text "([^"]*)?"$/,
-        checkContainsText
+        /^I expect (that|the) (element|inputfield) "([^"]*)?"( not)* contains the text "([^"]*)?"$/,
+        (article, selector, el, not, text, cb) => checkContainsText(selector, el, not, text, cb)
+    );
+    
+    this.Then(
+        /^I expect (that|the) (first|second|third|fourth|fifth|sixth) (element|inputfield) "([^"]*)?"( not)* contains the text "([^"]*)?"$/,
+        (article, order, selector, el, not, text, cb) => { 
+          checkContainsText(selector, nth(el, order), not, text, cb); }
     );
 
     this.Then(
-        /^I expect that (element|inputfield) "([^"]*)?"( not)* contains any text$/,
-        checkContainsAnyText
+        /^I expect (that|the)\s(first|second|third|fourth|fifth|sixth)?\s?(element|inputfield) "([^"]*)?"( not)* contains any text$/,
+        (article, ordinal, selector, el, not, cb) => 
+          { checkContainsAnyText(selector, nth(el, ordinal), not, cb); }
     );
 
     this.Then(
-        /^I expect that (element|inputfield) "([^"]*)?" is( not)* empty$/,
-        checkContainsAnyText
+        /^I expect (that|the) (element|inputfield) "([^"]*)?" is( not)* empty$/,
+        (article, selector, el, not, cb) => checkContainsAnyText(selector, el, not, cb)
     );
 
     this.Then(
-        /^I expect that the url is( not)* "([^"]*)?"$/,
-        checkURL
+        /^I expect (that|the) the url is( not)* "([^"]*)?"$/,
+        (article, not, url, cb) => checkURL(not, url, cb)
     );
 
     this.Then(
-        /^I expect that the path is( not)* "([^"]*)?"$/,
-        checkURLPath
+        /^I expect (that|the) the path is( not)* "([^"]*)?"$/,
+        (article, not, path, cb) => checkURLPath(not, path, cb)
     );
 
     this.Then(
@@ -93,48 +108,48 @@ module.exports = function then() {
     );
 
     this.Then(
-        /^I expect that the( css)* attribute "([^"]*)?" from element "([^"]*)?" is( not)* "([^"]*)?"$/,
-        checkProperty
+        /^I expect (that|the) the( css)* attribute "([^"]*)?" from element "([^"]*)?" is( not)* "([^"]*)?"$/,
+        (article, css, attr_one, el, not, attr_two, cb ) => checkProperty(css, attr_one, el, not, attr_two, cb)
     );
 
     this.Then(
-        /^I expect that checkbox "([^"]*)?" is( not)* checked$/,
-        checkSelected
+        /^I expect (that|the) checkbox "([^"]*)?" is( not)* checked$/,
+        (article, el, not, cb) => checkSelected(el, not, cb)
     );
 
     this.Then(
-        /^I expect that element "([^"]*)?" is( not)* selected$/,
-        checkSelected
+        /^I expect (that|the) element "([^"]*)?" is( not)* selected$/,
+        (article, el, not, cb) => checkSelected(el, not, cb)
     );
 
     this.Then(
-        /^I expect that element "([^"]*)?" is( not)* enabled$/,
-        isEnabled
+        /^I expect (that|the) (first|second|third)?\s*element "([^"]*)?" is( not)* enabled$/,
+        (article, ordinal, el, not, cb) => isEnabled(nth(el, ordinal), not, cb)
     );
 
     this.Then(
-        /^I expect that cookie "([^"]*)?"( not)* contains "([^"]*)?"$/,
-        checkCookieContent
+        /^I expect (that|the) cookie "([^"]*)?"( not)* contains "([^"]*)?"$/,
+        (article, cookie, not, text, cb) => checkCookieContent(cookie, not, text, cb)
     );
 
     this.Then(
-        /^I expect that cookie "([^"]*)?"( not)* exists$/,
-        checkCookieExists
+        /^I expect (that|the) cookie "([^"]*)?"( not)* exists$/,
+        (article, cookie, not, cb) => checkCookieExists(cookie, not, cb)
     );
 
     this.Then(
-        /^I expect that element "([^"]*)?" is( not)* ([\d]+)px (broad|tall)$/,
-        checkDimension
+        /^I expect (that|the) element "([^"]*)?" is( not)* ([\d]+)px (broad|tall)$/,
+        (article, el, not, px, size, cb) => checkDimension(el, not, px, size, cb)
     );
 
     this.Then(
-        /^I expect that element "([^"]*)?" is( not)* positioned at ([\d]+)px on the (x|y) axis$/,
-        checkOffset
+        /^I expect (that|the) element "([^"]*)?" is( not)* positioned at ([\d]+)px on the (x|y) axis$/,
+        (article, el, not, px, axis, cb) => checkOffset(el, not, px, axis, cb)
     );
 
     this.Then(
-        /^I expect that element "([^"]*)?" (has|does not have) the class "([^"]*)?"$/,
-        checkClass
+        /^I expect (that|the) element "([^"]*)?" (has|does not have) the class "([^"]*)?"$/,
+        (article, el, has, c, cb) => checkClass(el, has, c, cb)
     );
 
     this.Then(
@@ -143,13 +158,13 @@ module.exports = function then() {
     );
 
     this.Then(
-        /^I expect the url "([^"]*)?" is opened in a new (tab|window)$/,
-        checkIsOpenedInNewWindow
+        /^I expect (that|the) url "([^"]*)?" is opened in a new (tab|window)$/,
+        (article, url, type, cb) => checkIsOpenedInNewWindow(url, type, cb)
     );
 
     this.Then(
-        /^I expect that element "([^"]*)?" is( not)* focused$/,
-        checkFocus
+        /^I expect (that|the) element "([^"]*)?" is( not)* focused$/,
+        (article, el, not, cb) => checkFocus(el, not, cb)
     );
 
     this.Then(
@@ -158,12 +173,19 @@ module.exports = function then() {
     );
 
     this.Then(
-        /^I expect that a (alertbox|confirmbox|prompt) is( not)* opened$/,
-        checkModal
+        /^I expect (that|the|a) (alertbox|confirmbox|prompt) is( not)* opened$/,
+        (article, type, not, cb) => checkModal(type, not, cb)
     );
 
     this.Then(
-        /^I expect that a (alertbox|confirmbox|prompt)( not)* contains the text "([^"]*)?"$/,
-        checkModalText
+        /^I expect (that|the|a) (alertbox|confirmbox|prompt)( not)* contains the text "([^"]*)?"$/,
+        (article, type, not, text, cb) => checkModalText(type, not, text, cb)
+    );
+    
+    this.Then(/^I expect the browser to pause for ([0-9]*) milliseconds$/, pause);
+
+    this.Then(
+      /^I expect the element "([^"]*)?" is( not)* between ([0-9]+)px and ([0-9]+)px (tall|wide|broad)$/,
+      checkDimensionsBtwn
     );
 };

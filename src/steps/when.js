@@ -15,6 +15,7 @@ import setCookie from '../support/action/web/setCookie';
 import setInputField from '../support/action/web/setInputField';
 import setPromptText from '../support/action/web/setPromptText';
 import submitForm from '../support/action/web/submitForm';
+import nth from '../support/helpers/nth.js';
 
 module.exports = function when() {
     this.When(
@@ -25,6 +26,11 @@ module.exports = function when() {
     this.When(
         /^I (add|set) "([^"]*)?" to the inputfield "([^"]*)?"$/,
         setInputField
+    );
+    
+    this.When(
+        /^I (add|set) the inputfield "([^"]*)?" to "([^"]*)?"$/,
+        (opt, element, value, cb) => setInputField(opt, value, element, cb)
     );
 
     this.When(
@@ -101,4 +107,10 @@ module.exports = function when() {
         /^I move to element "([^"]*)?"( with an offset of (\d+),(\d+))*$/,
         moveToElement
     );
+
+
+   this.When(
+     /^I (click|doubleclick) on the (first|second|third|fourth|fifth|sixth) (link|button|element) "([^"]*)?"\s*$/,
+     (click, order, type, el, cb) =>  clickElement(click, type, nth(el, order), cb) 
+   );
 };
