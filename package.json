@@ -45,7 +45,7 @@
     "webdriverio": "~4.6.1"
   },
   "devDependencies": {
-    "appium": "^1.6.3",
+    "appium": "^1.7.1",
     "babel-jest": "~18.0.0",
     "babel-polyfill": "~6.20.0",
     "eslint": "~3.13.1",
